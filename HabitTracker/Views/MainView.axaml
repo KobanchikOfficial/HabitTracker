@@ -1,0 +1,122 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:HabitTracker.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="HabitTracker.Views.MainView"
+             x:DataType="vm:MainViewModel">
+	<UserControl.DataContext>
+		<vm:MainViewModel/>
+	</UserControl.DataContext>
+
+	<Grid Background="#1C1C1C">
+		<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+			
+		<StackPanel Background="Black" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
+			
+			<StackPanel Background="Black" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
+				<Button Content="Добавить привычку" Command="{Binding AddHabitCommand}" FontSize="21" CornerRadius="10" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+				<Button Content="Добавить день недели" Command="{Binding AddDayCommand}" FontSize="21" CornerRadius="10" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+			</StackPanel>
+			
+			<Border BorderBrush="WhiteSmoke" BorderThickness="2" Margin="10" CornerRadius="20">
+			
+				<StackPanel Background="Black" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
+	
+					<!-- Добавить привычку -->
+					
+						<StackPanel Background="Black" Margin="20">
+							<Border BorderBrush="WhiteSmoke" BorderThickness="2" Margin="50" CornerRadius="20">
+								<TextBlock Text="Привычки"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Top"
+                                           FontSize="28"
+                                           Margin="20"/>
+							</Border>
+							<ItemsControl ItemsSource="{Binding AddHabit}" Margin="0,80,0,0">
+								<ItemsControl.ItemTemplate>
+									<DataTemplate>
+										<Border Background="#FBD6FF" Margin="5" CornerRadius="5">
+											<TextBox Text="{Binding TaskText}"
+                                                     FontSize="18"
+                                                     Margin="10"
+                                                     Foreground="#636363"
+                                                     Background="#FBD6FF"/>
+										</Border>
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
+						</StackPanel>
+					
+
+					<!-- Добавить день недели -->
+
+						<StackPanel Background="Black" Margin="20">
+							<Border BorderBrush="WhiteSmoke" BorderThickness="2" Margin="50" CornerRadius="20">
+								<TextBlock Text="Дни недели"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Top"
+                                           FontSize="28"
+                                           Margin="20"/>
+							</Border>
+
+							<ItemsControl ItemsSource="{Binding AddDay}">
+								<ItemsControl.ItemsPanel>
+									<ItemsPanelTemplate>
+										<WrapPanel Orientation="Horizontal" />
+									</ItemsPanelTemplate>
+								</ItemsControl.ItemsPanel>
+								<ItemsControl.ItemTemplate>
+									<DataTemplate>
+										<Border Background="#FBD6FF" Margin="5" CornerRadius="5">
+											<TextBlock Text="{Binding TaskText}"
+													   FontSize="18"
+													   Margin="10"
+													   Foreground="#636363"
+													   Background="#FBD6FF"/>
+										</Border>
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
+
+							<Grid>
+								<ItemsControl ItemsSource="{Binding Matrix}" Margin="0,9,0,0">
+									<ItemsControl.ItemsPanel>
+										<ItemsPanelTemplate>
+											<WrapPanel Orientation="Vertical"/>
+										</ItemsPanelTemplate>
+									</ItemsControl.ItemsPanel>
+									<ItemsControl.ItemTemplate>
+										<DataTemplate>
+											<ItemsControl ItemsSource="{Binding}">
+												<ItemsControl.ItemsPanel>
+													<ItemsPanelTemplate>
+														<WrapPanel Orientation="Horizontal" Margin="0,0,0,0"/>
+													</ItemsPanelTemplate>
+												</ItemsControl.ItemsPanel>
+												<ItemsControl.ItemTemplate>
+													<DataTemplate>
+														<CheckBox IsChecked="{Binding}" Content=" " Margin="21,33,0,0"/>
+													</DataTemplate>
+												</ItemsControl.ItemTemplate>
+											</ItemsControl>
+										</DataTemplate>
+									</ItemsControl.ItemTemplate>
+								</ItemsControl>
+							</Grid>
+
+						</StackPanel>
+
+				</StackPanel>
+			</Border>
+
+		</StackPanel>
+			
+		</ScrollViewer>
+		
+		
+	</Grid>
+	
+	
+</UserControl>
